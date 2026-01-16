@@ -1,13 +1,19 @@
 const button = document.getElementById("loadBtn");
 const resultDiv = document.getElementById("result");
 
-// TODO: move https://runescape.wiki/w/Application_programming_interface to readme
+/*
+    APIs Used:
+        https://oldschool.runescape.wiki/w/RuneScape:Real-time_Prices
 
-const BASE_ROUTE =  "https://secure.runescape.com/m=itemdb_oldschool/api/";
+    Local Development through:
+        Live Server Extension
+*/
 
-const ITEM_MAP = new Map(
+const BASE_ROUTE =  "https://prices.runescape.wiki/api/v1/osrs/";
+
+const ITEM_MAP = new Map([
     // bars
-    ["addy_bar", 2361]
+    ["addy_bar", 2361],
     ["rune_bar", 2363],
     // ores
     ["addy_ore", 449],
@@ -15,23 +21,21 @@ const ITEM_MAP = new Map(
     // equipables
     ["addy_platebody", 1123],
     ["rune_2h_sword", 1319],
-);
-
-const ROUTE_MAP = new Map(
-    ["item_details", "catalogue/detail.json?item="],
-)
+]);
 
 button.addEventListener("click", async () => {
     try {
         // make route
-        const addyBarRoute = BASE_ROUTE + ROUTE_MAP.get("item_details") + ITEM_MAP.get("addy_bar");
+        const runeBarRoute = BASE_ROUTE + "latest?id="+ ITEM_MAP.get("rune_bar");
+        console.log(runeBarRoute);
         
         // Fetch
-        const response = await fetch(addyBarRoute);
-        const data = await response.json();
+        const response = await fetch(runeBarRoute);
+        const responseJSON = await response.json();
+        console.log(responseJSON);
 
         // Display the result
-        resultDiv.innerText = data.value;
+        resultDiv.innerText = JSON.stringify(responseJSON);
     } catch (error) {
         resultDiv.innerText = "Error fetching data!";
         console.error(error);
