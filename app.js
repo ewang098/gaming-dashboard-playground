@@ -1,76 +1,57 @@
 const button = document.getElementById("loadBtn");
+
 const itemDivMap = {
-    "rune_bar": document.getElementById("resultRuneBar"),
-    "rune_ore": document.getElementById("resultRuneOre"),
+    rune_bar: {
+        high_price: document.getElementById("priceRuneBarHigh"),
+        high_time: document.getElementById("timeRuneBarHigh"),
+        low_price: document.getElementById("priceRuneBarLow"),
+        low_time: document.getElementById("timeRuneBarLow"),
+    },
+    rune_ore: {
+        high_price: document.getElementById("priceRuneOreHigh"),
+        high_time: document.getElementById("timeRuneOreHigh"),
+        low_price: document.getElementById("priceRuneOreLow"),
+        low_time: document.getElementById("timeRuneOreLow"),
+    },
 };
-/*
-    APIs Used:
-        https://oldschool.runescape.wiki/w/RuneScape:Real-time_Prices
 
-    Local Development through:
-        Live Server Extension
-*/
-
-/*
-    TODOs:
-        styling
-        validate styling for desktop + iphone
-*/
-
-const BASE_ROUTE =  "https://prices.runescape.wiki/api/v1/osrs/";
-
+const BASE_ROUTE = "https://prices.runescape.wiki/api/v1/osrs/";
 const ITEM_MAP = new Map([
-    // bars
-    ["addy_bar", 2361],
     ["rune_bar", 2363],
-    // ores
-    ["addy_ore", 449],
     ["rune_ore", 451],
-    // equipables
-    ["addy_platebody", 1123],
-    ["rune_2h_sword", 1319],
 ]);
 
-function getRoute(itemId) {
-    return `${BASE_ROUTE}latest?id=${itemId}`;
-}
-
-function processPriceData(priceData) {
-    var [highPriceTime, lowPriceTime] = [
-        new Date(priceData.highTime * 1000).toLocaleTimeString(),
-        new Date(priceData.lowTime * 1000).toLocaleTimeString(),
-    ];
-
-    return `${priceData.high} at ${highPriceTime}, ${priceData.low} at ${lowPriceTime}`;
-}
-
-async function fetchAndDisplayPrice(itemId, displayDiv) {
+async function fetchAndDisplayPrice(itemName) {
     try {
-        const route = getRoute(itemId);
-        console.log("Fetching:", route);
-
-        // Optionally show a loading message for each item
-        displayDiv.innerText = "Loading...";
+        const itemId = ITEM_MAP.get(itemName);
+        const route = `${BASE_ROUTE}latest?id=${itemId}`;
+        const divs = itemDivMap[itemName];
+        Object.values(divs).forEach(d => d.innerText = "Loading...");
 
         const response = await fetch(route);
-        const responseJSON = await response.json();
-        const priceData = responseJSON.data[itemId];
+        const data = await response.json();
 
+        // Access API by string key
+        const priceData = data.data[itemId.toString()];
         if (!priceData) throw new Error("No data returned");
 
-        const result = processPriceData(priceData);
-        displayDiv.innerText = result;
+        const highTime = new Date(priceData.highTime * 1000).toLocaleTimeString();
+        const lowTime = new Date(priceData.lowTime * 1000).toLocaleTimeString();
+
+        divs.high_price.innerText = priceData.high;
+        divs.high_time.innerText = highTime;
+        divs.low_price.innerText = priceData.low;
+        divs.low_time.innerText = lowTime;
+
     } catch (error) {
-        displayDiv.innerText = "Error fetching data!";
-        console.error(`Error fetching item ${itemId}:`, error);
+        console.error(error);
+        Object.values(itemDivMap[itemName]).forEach(d => d.innerText = "Error!");
     }
 }
 
 button.addEventListener("click", async () => {
-    const promises = Object.entries(itemDivMap).map(([itemKey, div]) => {
-        const itemId = ITEM_MAP.get(itemKey);
-        return fetchAndDisplayPrice(itemId, div);
-    });
-
+    const promises = Object.keys(itemDivMap).map(itemName =>
+        fetchAndDisplayPrice(itemName)
+    );
     await Promise.all(promises);
 });
