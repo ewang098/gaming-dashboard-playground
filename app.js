@@ -75,7 +75,7 @@ button.addEventListener("click", async () => {
         updateDiff();
 
         // Delay BEFORE re-enabling
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 3000));
     } finally {
         // Re-enable button when everything is done
         button.disabled = false;
