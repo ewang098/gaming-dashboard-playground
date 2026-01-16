@@ -1,22 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rune Dashboard</title>
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #333; }
-    button { padding: 10px 15px; margin-bottom: 10px; }
-    #result { margin-top: 15px; font-weight: bold; }
+    :root {
+      --bg: #0f172a;              /* deep slate */
+      --card: #111827;            /* dark card */
+      --border: #1f2937;
+      --gold: #facc15;            /* gold accent */
+      --gold-hover: #eab308;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ---------- TITLE BAR ---------- */
+    .title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6em; /* scales with title size */
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+
+    /* Icons scale relative to title font size */
+    .title-icon {
+      height: 1.2em;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.9;
+    }
+
+    /* ---------- BUTTON ---------- */
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: var(--gold);
+      color: #1a1a1a;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background-color: var(--gold-hover);
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* ---------- CARDS ---------- */
+    .card {
+      background-color: var(--card);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .item-title {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .price {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+      min-height: 20px;
+    }
   </style>
 </head>
-<body>
-  <h1>Rune Dashboard</h1>
-  <button id="loadBtn">Load Prices</button>
-  <div id="resultRuneBar"></div>
-  <div id="resultRuneOre"></div>
 
-  <!-- Include our JS -->
+<body>
+  <div class="container">
+
+    <!-- TITLE WITH SCALING ICONS -->
+    <div class="title-bar">
+      <img src="./img/1024px-Runite_ore_detail.png" alt="Rune Ore" class="title-icon" />
+      <h1>Rune Dashboard</h1>
+      <img src="./img/1024px-Runite_bar_detail.png" alt="Rune Bar" class="title-icon" />
+    </div>
+
+    <button id="loadBtn">Load Prices</button>
+
+    <div class="card">
+      <div class="item-title">Rune Bar</div>
+      <div id="resultRuneBar" class="price">—</div>
+    </div>
+
+    <div class="card">
+      <div class="item-title">Rune Ore</div>
+      <div id="resultRuneOre" class="price">—</div>
+    </div>
+
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
