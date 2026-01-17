@@ -10,3 +10,4 @@ Currently uses [Live Server Extension](https://marketplace.visualstudio.com/item
 - look into adding linting as code base grows larger
 - add kenshi page with first being longest reach for each weapon type (make sure data itself is in javascript for easy maintenance)
 - add battle brothers page (quick ref on accuracy bonuses - i.e. spear, sword, polearm)
+- refactor deployable code to own folder -> add unit tests
