@@ -12,5 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run Biome CI Checker
+      # https://biomejs.dev/reference/cli/#biome-ci
+      - name: Biome CI Check
         run: npx @biomejs/biome ci
