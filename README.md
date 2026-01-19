@@ -13,7 +13,4 @@ Currently uses [Live Server Extension](https://marketplace.visualstudio.com/item
 - add unit tests
 
 ## New Pages
-- add kenshi page with first being longest reach for each weapon type (data in json)
-- kenshi page for mods? is there an api we can hit to retrieve details from mods in steam workshop?
-- add battle brothers page (quick ref on accuracy bonuses - i.e. spear, sword, polearm)
-- battle brothers - nexus mods api?
+- add battle brothers page (quick ref on accuracy bonuses - i.e. spear, sword, polearm + early enemy stats table?)
