@@ -114,7 +114,7 @@ function createSortableTable({ tableId, data, headers }) {
       if (key === sortKey) {
         th.textContent = key + (sortAsc ? " ▲" : " ▼");
       } else {
-        th.textContent = key + " ⇅";
+        th.textContent = `${key} ⇅`;
       }
     });
   }

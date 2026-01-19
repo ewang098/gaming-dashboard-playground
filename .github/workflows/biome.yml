@@ -14,3 +14,6 @@ jobs:
 
       - name: Format Check
         run: npx @biomejs/biome format
+
+      - name: Lint Check
+        run: npx @biomjs/biome lint

@@ -48,10 +48,10 @@ async function fetchAndDisplayPrice(itemName) {
 }
 
 function updateDiff() {
-  const barHigh = parseInt(itemDivMap.rune_bar.high_price.innerText) || 0;
-  const barLow = parseInt(itemDivMap.rune_bar.low_price.innerText) || 0;
-  const oreHigh = parseInt(itemDivMap.rune_ore.high_price.innerText) || 0;
-  const oreLow = parseInt(itemDivMap.rune_ore.low_price.innerText) || 0;
+  const barHigh = parseInt(itemDivMap.rune_bar.high_price.innerText, 10) || 0;
+  const barLow = parseInt(itemDivMap.rune_bar.low_price.innerText, 10) || 0;
+  const oreHigh = parseInt(itemDivMap.rune_ore.high_price.innerText, 10) || 0;
+  const oreLow = parseInt(itemDivMap.rune_ore.low_price.innerText, 10) || 0;
 
   document.getElementById("priceDiffHigh").innerText = barHigh - oreHigh;
   document.getElementById("priceDiffLow").innerText = barLow - oreLow;
