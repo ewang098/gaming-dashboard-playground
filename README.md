@@ -10,7 +10,6 @@ Uses [Biome](https://github.com/biomejs/biome) for linting and formatting
 
 # Planned Work 👷
 ## Code Maintainability
-- add linting checks and update repo so PRs are required to merge
 - refactor deployable code to own folder and update repo deploy folder
 - add unit tests
 
