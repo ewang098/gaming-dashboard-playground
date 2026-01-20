@@ -1,4 +1,4 @@
-name: Biome Check
+name: Biome
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint:
+  Check:
     runs-on: ubuntu-latest
 
     steps:
