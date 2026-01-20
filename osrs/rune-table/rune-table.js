@@ -26,7 +26,9 @@ async function fetchAndDisplayPrice(itemName) {
     const itemId = ITEM_MAP.get(itemName);
     const route = `${BASE_ROUTE}latest?id=${itemId}`;
     const divs = itemDivMap[itemName];
-    Object.values(divs).forEach((d) => (d.innerText = "Loading..."));
+    Object.values(divs).forEach((d) => {
+      d.innerText = "Loading...";
+    });
 
     const response = await fetch(route);
     const data = await response.json();
@@ -43,7 +45,9 @@ async function fetchAndDisplayPrice(itemName) {
     divs.low_time.innerText = lowTime;
   } catch (error) {
     console.error(error);
-    Object.values(itemDivMap[itemName]).forEach((d) => (d.innerText = "Error!"));
+    Object.values(itemDivMap[itemName]).forEach((d) => {
+      d.innerText = "Error!";
+    });
   }
 }
 
