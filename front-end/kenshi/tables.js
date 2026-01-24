@@ -17,50 +17,9 @@ const weaponReachData = [
   { Name: "Fragment_Axe", Class: "Heavy", Cut: 0.35, Blunt: 1.8, Reach: 32 },
 ];
 
-const turretConstructionData = [
-  {Name: "Mounted_XBOW", Stage: 1, Iron_Plates: 6, Copper:0, Steel_Bars: 0, Copper_Alloy_Plates: 0, Electrical_Components: 0},
-  {Name: "Mounted_XBOW_II", Stage: 2, Iron_Plates: 8, Copper: 0, Steel_Bars: 0, Copper_Alloy_Plates: 0, Electrical_Components: 0},
-  {Name: "Harpoon", Stage: 3, Iron_Plates: 7, Copper: 3, Steel_Bars: 3, Copper_Alloy_Plates: 0, Electrical_Components: 0},
-  {Name: "Harpoon_II", Stage: 4, Iron_Plates: 10, Copper: 4, Steel_Bars: 3, Copper_Alloy_Plates: 0, Electrical_Components: 0},
-  {Name: "Double-Barrel_Harpoon", Stage: 5, Iron_Plates: 0, Copper: 0, Steel_Bars:6, Copper_Alloy_Plates: 6, Electrical_Components: 6},
-];
-
-const turretDamageData = [
-  {Name: "Mounted_XBOW_II", Pierce_Dmg: 75, Max_Reload: "6s", Min_Reload: "1.5s", Range: "100m"},
-  {Name: "Harpoon",  Pierce_Dmg: 75, Max_Reload: "4s", Min_Reload: "2s", Range: "120m"},
-  {Name: "Harpoon_II", Pierce_Dmg: 90, Max_Reload: "4s", Min_Reload: "2s", Range: "120m"},
-  {Name: "Double-Barrel_Harpoon", Pierce_Dmg: 80, Max_Reload: "6s", Min_Reload: "2s", Range: "75m"},
-  {Name: "Multi-Barrel_Harpoon", Pierce_Dmg: 50, Max_Reload: "12s", Min_Reload: "2.5s", Range: "65m"},
-];
-
-// add pictures
-const buildingConstructionData = [
-  {Name: "Storm_House", Building_Mats: 16, Iron_Plates: 0, Copper_Alloy_Plates: 0},
-  {Name: "Longhouse", Building_Mats: 24, Iron_Plates: 0, Copper_Alloy_Plates: 0},
-  {Name: "Stationhouse", Building_Mats: 40, Iron_Plates: 0, Copper_Alloy_Plates: 0},
-  {Name: "Watchtower", Building_Mats: 60, Iron_Plates: 10, Copper_Alloy_Plates: 0},
-  {Name: "Outpost_s-III", Building_Mats: 20, Iron_Plates: 0, Copper_Alloy_Plates: 20},
-  {Name: "Outpost_s-IV", Building_Mats: 30, Iron_Plates: 0, Copper_Alloy_Plates: 30},
-];
-
-// TODO: add pictures
-const defensiveGateData = [
-  {Name: "Makeshift", Building_Mats: 5, Door_Condition: 15},
-  {Name: "Defensive_II", Building_Mats: 10, Door_Condition: 30},
-  {Name: "Defensive_III", Building_Mats: 15, Door_Condition: 60},
-  {Name: "Defensive_IV", Building_Mats: 20, Door_Condition: 90},
-];
-
-// TODO: add pictures
-const windEnergyData = [
-  {Name: "Small_Generator", Energy_Output: 25, Iron_Plates: 7, Copper: 0, Electrical_Components: 4},
-  {Name: "Generator", Energy_Output: 50, Iron_Plates: 8, Copper: 5, Electrical_Components: 0},
-  {Name: "Generator_II", Energy_Output: 100, Iron_Plates: 8, Copper: 0, Electrical_Components: 8},
-];
-
 // TODO: would be better to merge dupes so we dont need to review cell by cell,
 // TODO: figure out images
-bodyPartHitChancesData = [
+const bodyPartHitChancesData = [
   { Name: "Greenlander", Head: 80, Chest: 140, Stomach: 140, Right_Arm: 40, Left_Arm: 80, Legs: 80 },
   // shek + scorchlander are same
   { Name: "Scorchlander", Head: 80, Chest: 140, Stomach: 140, Right_Arm: 60, Left_Arm: 80, Legs: 80 },
@@ -114,11 +73,15 @@ const heavyBodyArmourData = [
   },
 ];
 
+const tablesWithNoImages = [
+    "bodyPartHitChancesTable",
+];
+
 // =====================
 // GENERIC SORTABLE TABLE FUNCTION
 // =====================
-function createSortableTable({ tableId, data, headers }) {
-  let sortKey = headers[0];
+function createSortableTable({ tableId, data, headers, sortName }) {
+  let sortKey = sortName ?? headers[0];
   let sortAsc = true;
 
   const table = document.getElementById(tableId);
@@ -181,8 +144,7 @@ function createSortableTable({ tableId, data, headers }) {
           text.textContent = row.Name;
           wrapper.appendChild(text);
 
-          // if additional tables do not have image we will have list of tables
-          if (tableId !== "bodyPartHitChancesTable") {
+          if (!(tablesWithNoImages.includes(tableId))) {
             const img = document.createElement("img");
             img.src = `img/${tableId}/${row.Name}.jpg`;
             img.alt = row.Name;
@@ -219,53 +181,26 @@ createSortableTable({
   tableId: "weaponTable",
   data: weaponReachData,
   headers: Object.keys(weaponReachData[0]),
-});
-
-createSortableTable({
-  tableId: "turretConstructionTable",
-  data: turretConstructionData,
-  headers: Object.keys(turretConstructionData[0]),
-});
-
-createSortableTable({
-  tableId: "buildingConstructionTable",
-  data: buildingConstructionData,
-  headers: Object.keys(buildingConstructionData[0]),
-});
-
-createSortableTable({
-  tableId: "defensiveGateTable",
-  data: defensiveGateData,
-  headers: Object.keys(defensiveGateData[0]),
-});
-
-createSortableTable({
-  tableId: "windEnergyTable",
-  data: windEnergyData,
-  headers: Object.keys(windEnergyData[0]),
-});
-
-
-createSortableTable({
-  tableId: "turretDamageTable",
-  data: turretDamageData,
-  headers: Object.keys(turretDamageData[0]),
+  sortName: 'Reach',
 });
 
 createSortableTable({
   tableId: "bodyPartHitChancesTable",
   data: bodyPartHitChancesData,
   headers: Object.keys(bodyPartHitChancesData[0]),
+  sortName: 'Stomach',
 });
 
 createSortableTable({
   tableId: "medBodyArmourTable",
   data: medBodyArmourData,
   headers: Object.keys(medBodyArmourData[0]),
+  sortName: 'Cut_Res_Eff',
 });
 
 createSortableTable({
   tableId: "heavyBodyArmourTable",
   data: heavyBodyArmourData,
   headers: Object.keys(heavyBodyArmourData[0]),
+  sortName: 'Cut_Res_Eff',
 });
