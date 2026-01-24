@@ -14,13 +14,21 @@ const weaponReachData = [
   { Name: "Fragment_Axe", Class: "Heavy", Cut: 0.35, Blunt: 1.8, Reach: 32 },
 ];
 
-const turretData = [
+const turretConstructionData = [
   {Name: "Mounted_XBOW", Stage: 1, Iron_Plates: 6, Copper:0, Steel_Bars: 0, Copper_Alloy_Plates: 0, Electrical_Components: 0},
   {Name: "Mounted_XBOW_II", Stage: 2, Iron_Plates: 8, Copper: 0, Steel_Bars: 0, Copper_Alloy_Plates: 0, Electrical_Components: 0},
   {Name: "Harpoon", Stage: 3, Iron_Plates: 7, Copper: 3, Steel_Bars: 3, Copper_Alloy_Plates: 0, Electrical_Components: 0},
   {Name: "Harpoon_II", Stage: 4, Iron_Plates: 10, Copper: 4, Steel_Bars: 3, Copper_Alloy_Plates: 0, Electrical_Components: 0},
   {Name: "Double-Barrel_Harpoon", Stage: 5, Iron_Plates: 0, Copper: 0, Steel_Bars:6, Copper_Alloy_Plates: 6, Electrical_Components: 6},
 ];
+
+const turretDamageData = [
+  {Name: "Mounted_XBOW_II", Pierce_Dmg: 75, Max_Reload: "6s", Min_Reload: "1.5s", Range: "100m"},
+  {Name: "Harpoon",  Pierce_Dmg: 75, Max_Reload: "4s", Min_Reload: "2s", Range: "120m"},
+  {Name: "Harpoon_II", Pierce_Dmg: 90, Max_Reload: "4s", Min_Reload: "2s", Range: "120m"},
+  {Name: "Double-Barrel_Harpoon", Pierce_Dmg: 80, Max_Reload: "6s", Min_Reload: "2s", Range: "75m"},
+  {Name: "Multi-Barrel_Harpoon", Pierce_Dmg: 50, Max_Reload: "12s", Min_Reload: "2.5s", Range: "65m"},
+]
 
 // TODO: would be better to merge dupes so we dont need to review cell by cell,
 // TODO: figure out images
@@ -186,10 +194,16 @@ createSortableTable({
 });
 
 createSortableTable({
-  tableId: "turretTable",
-  data: turretData,
-  headers: Object.keys(turretData[0]),
+  tableId: "turretConstructionTable",
+  data: turretConstructionData,
+  headers: Object.keys(turretConstructionData[0]),
 });
+
+createSortableTable({
+  tableId: "turretDamageTable",
+  data: turretDamageData,
+  headers: Object.keys(turretDamageData[0]),
+})
 
 createSortableTable({
   tableId: "bodyPartHitChancesTable",
