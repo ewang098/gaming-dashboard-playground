@@ -44,11 +44,18 @@ const buildingConstructionData = [
 ];
 
 // TODO: add pictures
-const defensiveGateTableData = [
+const defensiveGateData = [
   {Name: "Makeshift", Building_Mats: 5, Door_Condition: 15},
   {Name: "Defensive_II", Building_Mats: 10, Door_Condition: 30},
   {Name: "Defensive_III", Building_Mats: 15, Door_Condition: 60},
   {Name: "Defensive_IV", Building_Mats: 20, Door_Condition: 90},
+];
+
+// TODO: add pictures
+const windEnergyData = [
+  {Name: "Small_Generator", Energy_Output: 25, Iron_Plates: 7, Copper: 0, Electrical_Components: 4},
+  {Name: "Generator", Energy_Output: 50, Iron_Plates: 8, Copper: 5, Electrical_Components: 0},
+  {Name: "Generator_II", Energy_Output: 100, Iron_Plates: 8, Copper: 0, Electrical_Components: 8},
 ];
 
 // TODO: would be better to merge dupes so we dont need to review cell by cell,
@@ -228,9 +235,16 @@ createSortableTable({
 
 createSortableTable({
   tableId: "defensiveGateTable",
-  data: defensiveGateTableData,
-  headers: Object.keys(defensiveGateTableData[0]),
+  data: defensiveGateData,
+  headers: Object.keys(defensiveGateData[0]),
 });
+
+createSortableTable({
+  tableId: "windEnergyTable",
+  data: windEnergyData,
+  headers: Object.keys(windEnergyData[0]),
+});
+
 
 createSortableTable({
   tableId: "turretDamageTable",
