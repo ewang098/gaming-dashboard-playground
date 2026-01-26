@@ -147,7 +147,7 @@ function createSortableTable({ tableId, data, headers, sortName }) {
           if (!tablesWithNoImages.includes(tableId)) {
             console.log(tableId);
             const img = document.createElement("img");
-            img.src = "../" + `img/${tableId}/${row.Name}.jpg`;
+            img.src = `../img/${tableId}/${row.Name}.jpg`;
             img.alt = row.Name;
             wrapper.appendChild(img);
           }
