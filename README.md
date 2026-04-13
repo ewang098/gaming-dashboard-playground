@@ -8,6 +8,10 @@ Currently uses [Live Server Extension](https://marketplace.visualstudio.com/item
 
 Uses [Biome](https://github.com/biomejs/biome) for linting and formatting
 
+# Deployments
+- Deployed with GitHub Pages
+- Image pushed to GHCR on feat/fix
+
 # Planned Work 👷
 ## UI
 - freeze top so that links are always accessible while scrolling
