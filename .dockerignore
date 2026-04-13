@@ -1,0 +1,6 @@
+.git
+.github
+README.md
+biome.jsonc
+Dockerfile
+.dockerignore
