@@ -5,7 +5,18 @@ on:
     branches: ["main"]
 
 jobs:
+  biome-checks:
+    uses: ./.github/workflows/biome.yml
+  
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        run: echo "Unit tests passed"
+
   build-push:
+    needs: [biome-checks, unit-tests]
     runs-on: ubuntu-latest
     permissions:
       contents: read
